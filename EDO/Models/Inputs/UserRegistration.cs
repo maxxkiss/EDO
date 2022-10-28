@@ -5,13 +5,9 @@ namespace EDO.Models.Inputs
 {
     public class UserRegistration
     {
-        public UserRegistration(string firstName, string secondName, string? thirdName, string login, string password)
+        public UserRegistration()
         {
-            FirstName = firstName;
-            SecondName = secondName;
-            ThirdName = thirdName;
-            Login = login;
-            Password = password;
+            
         }
 
         public string FirstName { get; set; } = null!;

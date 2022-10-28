@@ -28,11 +28,12 @@ namespace EDO.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Document>(entity =>
             {
                 entity.ToTable("Document");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreateDate).HasColumnType("timestamp without time zone");
 
@@ -91,7 +92,7 @@ namespace EDO.Models
             {
                 entity.ToTable("DocumentType");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Type).HasMaxLength(150);
             });
@@ -100,7 +101,7 @@ namespace EDO.Models
             {
                 entity.ToTable("Stage");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -111,7 +112,7 @@ namespace EDO.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.FirstName).HasMaxLength(50);
 
