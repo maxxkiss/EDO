@@ -8,7 +8,7 @@ namespace EDO.Repositories.Interfaces
         Task<Guid> CreateUser(UserRegistration userRegistration);
         Task UpdateUser(User user, UserRegistration userRegistration);
         Task<bool> IsLoginUsed(string login);
-        Task<User> FindUserById(Guid userGuid);
+        Task<User> FindUserById(Guid userId);
         Task<User> FindUserByLogin(string login);
     }
 }

@@ -1,12 +1,14 @@
 ﻿using EDO.Models;
+using EDO.Models.Inputs;
+using EDO.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace EDO.Repository
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class DocumentRepository
+    public class DocumentRepository : IDocumentRepository
     {
         private readonly EDOContext _context;
 
@@ -15,6 +17,27 @@ namespace EDO.Repository
             _context = context;
         }
 
+        public async Task<Document> GetDocumentById(Guid documentId)
+        {
+            var document = await _context.Documents.SingleOrDefaultAsync(u => u.Id == documentId);
+            if (document is null)
+                throw new Exception("Document not found");
+            return document;
+        }
 
+        public async Task<Guid> CreateDocument(Document newDocument)
+        {
+            await _context.Documents.AddAsync(newDocument);
+            await _context.SaveChangesAsync();
+            return newDocument.Id;
+        }
+
+        public async Task<User> FindRecipientByLogin(string recipientLogin)
+        {
+            var recipient = await _context.Users.SingleOrDefaultAsync(u => u.Login == recipientLogin);
+            if (recipient is null)
+                throw new Exception("Recipient not found");
+            return recipient;
+        }
     }
 }

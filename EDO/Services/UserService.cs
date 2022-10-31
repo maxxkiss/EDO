@@ -25,9 +25,9 @@ namespace EDO.Services
             return await _userRepository.CreateUser(userRegistration);
         }
 
-        public async Task UpdateUser(Guid userGuid, UserRegistration userRegistration)
+        public async Task UpdateUser(Guid userId, UserRegistration userRegistration)
         {
-            var currentUser = await _userRepository.FindUserById(userGuid);
+            var currentUser = await _userRepository.FindUserById(userId);
             if (currentUser.Login != userRegistration.Login)
             {
                 if (await _userRepository.IsLoginUsed(userRegistration.Login))

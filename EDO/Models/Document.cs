@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EDO.Models.Inputs;
+using System;
 using System.Collections.Generic;
 
 namespace EDO.Models
@@ -7,6 +8,16 @@ namespace EDO.Models
     {
         public Document()
         {
+            DocumentStages = new HashSet<DocumentStage>();
+        }
+
+        public Document(string title, Guid type, Guid author, Guid recipient)
+        {
+            Title = title;
+            CreateDate = DateTime.Now;
+            Type = type;
+            Author = author;
+            Recipient = recipient;
             DocumentStages = new HashSet<DocumentStage>();
         }
 

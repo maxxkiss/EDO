@@ -23,11 +23,11 @@ namespace EDO.Controllers
         }
 
         [HttpPut]
-        [Route("{userGuid}")]
-        public async Task<ActionResult<Guid>> UpdateUser([FromRoute] Guid userGuid, UserRegistration userRegistration)
+        [Route("{userId}")]
+        public async Task<ActionResult<Guid>> UpdateUser([FromRoute] Guid userId, UserRegistration userRegistration)
         {
-            await _userService.UpdateUser(userGuid, userRegistration);
-            return Ok(userGuid);
+            await _userService.UpdateUser(userId, userRegistration);
+            return Ok(userId);
         }
 
         [HttpGet]
