@@ -2,6 +2,7 @@
 using EDO.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Transactions;
 
 namespace EDO.Controllers
 {
@@ -27,6 +28,14 @@ namespace EDO.Controllers
         {
             await _userService.UpdateUser(userGuid, userRegistration);
             return Ok(userGuid);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<bool>> AuthoriseUser(string login, string password)
+        {
+            if (await _userService.AuthoriseUser(login, password))
+                return Ok();
+            return BadRequest();
         }
     }
 }

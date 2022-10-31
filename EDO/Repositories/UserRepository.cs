@@ -21,6 +21,13 @@ namespace EDO.Repositories
             return await _context.Users.AnyAsync(u => u.Login == login);
         }
 
+        public async Task<bool> IsLoginUsedBeforeUpdate(string login)
+        {
+            var currentUser = await FindUserByLogin(login);
+
+            return await _context.Users.AnyAsync(u => u.Login == login);
+        }
+
         public async Task<Guid> CreateUser(UserRegistration userRegistration)
         {
             var newUser = new User(
@@ -35,10 +42,8 @@ namespace EDO.Repositories
             return newUser.Id;
         }
 
-        public async Task UpdateUser(Guid userGuid, UserRegistration userRegistration)
+        public async Task UpdateUser(User user, UserRegistration userRegistration)
         {
-            var user = await FindUserById(userGuid);
-
             user.FirstName = userRegistration.FirstName;
             user.SecondName = userRegistration.SecondName;
             user.ThirdName = userRegistration.ThirdName;
@@ -51,6 +56,13 @@ namespace EDO.Repositories
         public async Task<User> FindUserById(Guid userGuid)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == userGuid);
+            if (user == null)
+                throw new Exception("User not found");
+            return user;
+        }
+        public async Task<User> FindUserByLogin(string login)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Login == login);
             if (user == null)
                 throw new Exception("User not found");
             return user;

@@ -6,5 +6,6 @@ namespace EDO.Services.Interfaces
     {
         Task<Guid> RegisterUser(UserRegistration userRegistration);
         Task UpdateUser(Guid userGuid, UserRegistration userRegistration);
+        Task<bool> AuthoriseUser(string login, string password);
     }
 }

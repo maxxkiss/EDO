@@ -27,9 +27,23 @@ namespace EDO.Services
 
         public async Task UpdateUser(Guid userGuid, UserRegistration userRegistration)
         {
-            //if (await _userRepository.IsLoginUsed(userRegistration.Login))
-            //    throw new Exception("This login is already used");
-            await _userRepository.UpdateUser(userGuid, userRegistration);
+            var currentUser = await _userRepository.FindUserById(userGuid);
+            if (currentUser.Login != userRegistration.Login)
+            {
+                if (await _userRepository.IsLoginUsed(userRegistration.Login))
+                    throw new Exception("This login is already used");
+            }
+            await _userRepository.UpdateUser(currentUser, userRegistration);
+        }
+
+        public async Task<bool> AuthoriseUser(string login, string password)
+        {
+            if (!await _userRepository.IsLoginUsed(login))
+                throw new Exception("Login not found");
+            var user = await _userRepository.FindUserByLogin(login);
+            if (user.Password == password)
+                return true;
+            return false;
         }
     }
 }
