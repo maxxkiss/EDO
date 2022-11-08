@@ -32,9 +32,9 @@ namespace EDO.Repository
             return newDocument.Id;
         }
 
-        public async Task<User> FindRecipientByLogin(string recipientLogin)
+        public async Task<User> FindRecipientById(Guid recipientId)
         {
-            var recipient = await _context.Users.SingleOrDefaultAsync(u => u.Login == recipientLogin);
+            var recipient = await _context.Users.SingleOrDefaultAsync(u => u.Id == recipientId);
             if (recipient is null)
                 throw new Exception("Recipient not found");
             return recipient;

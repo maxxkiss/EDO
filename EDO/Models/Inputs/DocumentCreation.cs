@@ -12,6 +12,6 @@ namespace EDO.Models.Inputs
 
         public string Title { get; set; } = null!;
         public Guid Type { get; set; }
-        public string Recipient { get; set; } = null!;
+        public Guid RecipientId { get; set; }
     }
 }

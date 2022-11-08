@@ -7,6 +7,6 @@ namespace EDO.Repositories.Interfaces
     {
         Task<Document> GetDocumentById(Guid documentId);
         Task<Guid> CreateDocument(Document documentId);
-        Task<User> FindRecipientByLogin(string recipientLogin);
+        Task<User> FindRecipientById(Guid recipientLogin);
     } 
 }

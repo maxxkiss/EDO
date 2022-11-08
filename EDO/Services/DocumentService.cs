@@ -22,7 +22,7 @@ namespace EDO.Services
 
         public async Task<Guid> CreateDocument(Guid userId, DocumentCreation documentCreation)
         {
-            var recipient = await _documentRepository.FindRecipientByLogin(documentCreation.Recipient);
+            var recipient = await _documentRepository.FindRecipientById(documentCreation.RecipientId);
             var newDocument = new Document(
                    documentCreation.Title,
                    documentCreation.Type,

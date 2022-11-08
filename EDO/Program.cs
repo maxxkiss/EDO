@@ -1,6 +1,7 @@
 using EDO.Models;
 using EDO.Repositories;
 using EDO.Repositories.Interfaces;
+using EDO.Repository;
 using EDO.Services;
 using EDO.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,10 @@ builder.Services.AddMvcCore();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
+
+builder.Services.AddScoped<IDocumentService, DocumentService>();
 
 var app = builder.Build();
 app.UseHttpsRedirection();
